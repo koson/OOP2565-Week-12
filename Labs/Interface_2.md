@@ -1,0 +1,61 @@
+# interface
+
+```cs
+namespace InterfaceExamples
+{
+    class Person : IPerson
+    {
+        public string? Name { get; set; }
+
+
+        void IPerson.Drive()
+        {
+
+        }
+    }
+    class Car : ICar
+    {
+        public string? NamePlate { get; set; }
+        void ICar.Drive()
+        {
+
+        }
+    }
+    interface IPerson
+    {
+        public string? Name { get; set; }
+        void Drive();
+    }
+    interface ICar
+    {
+        public string? NamePlate { get; set; }
+        void Drive();
+    }
+    class PersonDriveCar : IPerson, ICar
+    {
+        public string? NamePlate { get; set; }
+        public string? Name { get; set; }
+        void ICar.Drive()
+        {
+            Console.WriteLine($"Car {NamePlate} is driven by {Name}"); ;
+        }
+        void IPerson.Drive()
+        {
+            Console.WriteLine($"{Name} is driving car ID {NamePlate}"); ;
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            PersonDriveCar personDriveCar = new PersonDriveCar() { Name = "Thongchai", NamePlate = "ab-1234" };
+            IPerson ip = personDriveCar;
+            ip.Drive();
+            ICar ic = personDriveCar;
+            ic.Drive();
+        }
+    }
+}
+```
+
+
